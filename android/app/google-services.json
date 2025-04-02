@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "621545797946",
+    "project_id": "pokemoncodingchallenge",
+    "storage_bucket": "pokemoncodingchallenge.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:621545797946:android:895f8a5659677c37423803",
+        "android_client_info": {
+          "package_name": "com.pokemoncodingchallenge"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "621545797946-09slf0ub1itikgahcv7h3l7pm7fgir9f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pokemoncodingchallenge",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "621545797946-bn5k431lams66re71iamr3h21isk1lv8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAk4p8zC1FxXKnzTZp8eo2x8HGXBPelY1c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "621545797946-bn5k431lams66re71iamr3h21isk1lv8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "621545797946-qce6ak91p7b993c9j79nrd4l186t8frg.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.pokemonCodingChallenge"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
