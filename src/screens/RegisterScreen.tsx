@@ -1,5 +1,5 @@
 // screens/RegisterScreen.js
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -11,49 +11,66 @@ import {
   Platform,
   ScrollView,
 } from 'react-native';
-import { COLORS, SPACING, FONT_SIZES, SHADOWS, BORDER_RADIUS } from '../utils/theme';
+import {
+  COLORS,
+  SPACING,
+  FONT_SIZES,
+  SHADOWS,
+  BORDER_RADIUS,
+} from '../utils/theme';
 import Button from '../components/Button';
 import Input from '../components/Input';
 import Divider from '../components/Divider';
-import { NavigationProp, useNavigation } from '@react-navigation/native';
-import { useRegisterMutation } from '../hooks/useRegisterMutation';
+import {NavigationProp, useNavigation} from '@react-navigation/native';
+import {useRegisterMutation} from '../hooks/useRegisterMutation';
+import EmailOutline from '../assets/icons/EmailOutline';
+import EyeOffOutline from '../assets/icons/EyeOffOutline';
+import EyeOutline from '../assets/icons/EyeOutline';
+import LockOutline from '../assets/icons/LockOutline';
+import AccountOutline from '../assets/icons/AccountOutline';
+import GoogleIcon from '../assets/icons/GoogleIcon';
+import { useGoogleLogin } from '../hooks/useGoogleLogin';
 
 // Include required icons (example)
 // import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const RegisterScreen = () => {
-  const navigation = useNavigation<NavigationProp<any>>()
+  const navigation = useNavigation<NavigationProp<any>>();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const {mutateAsync: register, isPending: isLoading} = useRegisterMutation()
+  const {mutateAsync: register, isPending: isLoading} = useRegisterMutation();
+  const {mutateAsync: loginWithGoogle, isPending: isLoadingGoogle} = useGoogleLogin();
   const handleRegister = async () => {
     await register({
       email,
       password,
-    })
+    });
   };
 
-  const handleGoogleSignIn = () => {
-    // Implement Google Sign-In logic
+  const handleGoogleSignIn = async () => {
+    await loginWithGoogle();
   };
 
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        style={styles.keyboardView}
-      >
+        style={styles.keyboardView}>
         <ScrollView contentContainerStyle={styles.scrollContent}>
           <View style={styles.header}>
             <Image
-              source={{ uri: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/7.png' }}
+              source={{
+                uri: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/7.png',
+              }}
               style={styles.logo}
             />
             <Text style={styles.title}>Become a Trainer</Text>
-            <Text style={styles.subtitle}>Register to start your Pokémon journey!</Text>
+            <Text style={styles.subtitle}>
+              Register to start your Pokémon journey!
+            </Text>
           </View>
 
           <View style={styles.formContainer}>
@@ -62,7 +79,7 @@ const RegisterScreen = () => {
               value={name}
               onChangeText={setName}
               placeholder="Ash Ketchum"
-              // icon={<Icon name="account-outline" size={20} color={COLORS.gray} />}
+              icon={<AccountOutline />}
             />
 
             <Input
@@ -72,34 +89,31 @@ const RegisterScreen = () => {
               placeholder="trainer@pokemon.com"
               keyboardType="email-address"
               autoCapitalize="none"
-              // icon={<Icon name="email-outline" size={20} color={COLORS.gray} />}
+              icon={<EmailOutline />}
             />
 
             <Input
               label="Password"
               value={password}
               onChangeText={setPassword}
-              placeholder="Create your secret code"
+              placeholder="Create your password"
               secureTextEntry={!showPassword}
-              // icon={<Icon name="lock-outline" size={20} color={COLORS.gray} />}
-              // rightIcon={
-              //   <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
-              //     <Icon
-              //       name={showPassword ? 'eye-off-outline' : 'eye-outline'}
-              //       size={20}
-              //       color={COLORS.gray}
-              //     />
-              //   </TouchableOpacity>
-              // }
+              icon={<LockOutline />}
+              rightIcon={
+                <TouchableOpacity
+                  onPress={() => setShowPassword(!showPassword)}>
+                  {showPassword ? <EyeOffOutline /> : <EyeOutline />}
+                </TouchableOpacity>
+              }
             />
 
             <Input
               label="Confirm Password"
               value={confirmPassword}
               onChangeText={setConfirmPassword}
-              placeholder="Confirm your secret code"
+              placeholder="Confirm your password"
               secureTextEntry={!showPassword}
-              // icon={<Icon name="lock-check-outline" size={20} color={COLORS.gray} />}
+              icon={<LockOutline />}
             />
 
             <Button
@@ -115,7 +129,7 @@ const RegisterScreen = () => {
               title="Sign up with Google"
               onPress={handleGoogleSignIn}
               type="google"
-              // icon={<Icon name="google" size={20} color={COLORS.dark} />}
+              icon={<GoogleIcon />}
             />
           </View>
 

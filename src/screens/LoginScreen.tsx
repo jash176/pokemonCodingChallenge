@@ -1,5 +1,5 @@
 // screens/LoginScreen.js
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -11,30 +11,41 @@ import {
   Platform,
   ScrollView,
 } from 'react-native';
-import { COLORS, SPACING, FONT_SIZES, SHADOWS, BORDER_RADIUS } from '../utils/theme';
+import {
+  COLORS,
+  SPACING,
+  FONT_SIZES,
+  SHADOWS,
+  BORDER_RADIUS,
+} from '../utils/theme';
 import Button from '../components/Button';
 import Input from '../components/Input';
 import Divider from '../components/Divider';
-import { NavigationProp, useNavigation } from '@react-navigation/native';
-import { useLoginMutation } from '../hooks/useLogin';
-import { useGoogleLogin } from '../hooks/useGoogleLogin';
+import {NavigationProp, useNavigation} from '@react-navigation/native';
+import {useLoginMutation} from '../hooks/useLogin';
+import {useGoogleLogin} from '../hooks/useGoogleLogin';
+import LockOutline from '../assets/icons/LockOutline';
+import EyeOffOutline from '../assets/icons/EyeOffOutline';
+import EyeOutline from '../assets/icons/EyeOutline';
+import EmailOutline from '../assets/icons/EmailOutline';
+import GoogleIcon from '../assets/icons/GoogleIcon';
 
 // Include required icons (example)
 // import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const LoginScreen = () => {
-  const navigation = useNavigation<NavigationProp<any>>()
+  const navigation = useNavigation<NavigationProp<any>>();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  const { mutateAsync: loginUser, isPending } = useLoginMutation();
-  const { mutateAsync: loginWithGoogle, isPending: isLoading } = useGoogleLogin();
+  const {mutateAsync: loginUser, isPending} = useLoginMutation();
+  const {mutateAsync: loginWithGoogle, isPending: isLoading} = useGoogleLogin();
   const handleLogin = async () => {
     await loginUser({
       email,
       password,
-    })
+    });
   };
 
   const handleGoogleSignIn = async () => {
@@ -45,16 +56,19 @@ const LoginScreen = () => {
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        style={styles.keyboardView}
-      >
+        style={styles.keyboardView}>
         <ScrollView contentContainerStyle={styles.scrollContent}>
           <View style={styles.header}>
             <Image
-              source={{ uri: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png' }}
+              source={{
+                uri: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png',
+              }}
               style={styles.logo}
             />
             <Text style={styles.title}>Pokémon Trainer</Text>
-            <Text style={styles.subtitle}>Sign in to continue your journey!</Text>
+            <Text style={styles.subtitle}>
+              Sign in to continue your journey!
+            </Text>
           </View>
 
           <View style={styles.formContainer}>
@@ -65,30 +79,23 @@ const LoginScreen = () => {
               placeholder="trainer@pokemon.com"
               keyboardType="email-address"
               autoCapitalize="none"
-            // icon={<Icon name="email-outline" size={20} color={COLORS.gray} />}
+              icon={<EmailOutline />}
             />
 
             <Input
               label="Password"
               value={password}
               onChangeText={setPassword}
-              placeholder="Your secret code"
+              placeholder="Your password"
               secureTextEntry={!showPassword}
-            // icon={<Icon name="lock-outline" size={20} color={COLORS.gray} />}
-            // rightIcon={
-            //   <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
-            //     <Icon
-            //       name={showPassword ? 'eye-off-outline' : 'eye-outline'}
-            //       size={20}
-            //       color={COLORS.gray}
-            //     />
-            //   </TouchableOpacity>
-            // }
+              icon={<LockOutline />}
+              rightIcon={
+                <TouchableOpacity
+                  onPress={() => setShowPassword(!showPassword)}>
+                  {showPassword ? <EyeOffOutline /> : <EyeOutline />}
+                </TouchableOpacity>
+              }
             />
-
-            <TouchableOpacity style={styles.forgotPassword}>
-              <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
-            </TouchableOpacity>
 
             <Button
               title="Sign In"
@@ -105,7 +112,7 @@ const LoginScreen = () => {
               type="google"
               loading={isLoading}
               disabled={isPending}
-            // icon={<Icon name="google" size={20} color={COLORS.dark} />}
+              icon={<GoogleIcon />}
             />
           </View>
 

@@ -3,14 +3,18 @@ import { useMutation } from "@tanstack/react-query";
 import { Alert } from "react-native";
 import { authApi } from "../api/auth";
 import { useAuth } from "../contexts/auth";
+import { NotificationService } from "../services/NotificationService";
+import { StorageUtils } from "../utils/storage";
 
 export const useRegisterMutation = () => {
     const {login} = useAuth()
     // const navigation = useNavigation<NavigationProp<any>>();
     return useMutation({
         mutationFn: authApi.register,
-        onSuccess: (data) => {
+        onSuccess: async (data) => {
             login(data.user)
+            const token = await NotificationService.getFcmToken();
+            StorageUtils.setItem("fcmtoken", token);
             // navigation.navigate("Home");
         },
         onError: (error: any) => {
