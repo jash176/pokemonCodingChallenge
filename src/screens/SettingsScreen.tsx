@@ -126,7 +126,7 @@ export default function SettingsScreen() {
 
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Account</Text>
-          <TouchableOpacity style={styles.settingItem} onPress={handleLogout}>
+          <TouchableOpacity testID='btn-logout' style={styles.settingItem} onPress={handleLogout}>
             <Text style={styles.settingText}>Logout</Text>
             <Text style={styles.logoutText}>→</Text>
           </TouchableOpacity>

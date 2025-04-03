@@ -2,6 +2,7 @@ import React from 'react';
 import { TouchableOpacity, Text, StyleSheet, ActivityIndicator } from 'react-native';
 import { COLORS, BORDER_RADIUS, SPACING, FONT_SIZES } from '../utils/theme';
 interface ButtonProps {
+    testID?: string;
     title: string;
     onPress: () => void;
     type?: 'primary' | 'secondary' | 'outline' | 'google';
@@ -10,7 +11,7 @@ interface ButtonProps {
     style?: any;
     disabled?: boolean;
 }
-const Button = ({ title, onPress, type = 'primary', loading = false, icon, style, disabled }: ButtonProps) => {
+const Button = ({ title, onPress, type = 'primary', loading = false, icon, style, disabled, testID }: ButtonProps) => {
     const buttonStyles = [
         styles.button,
         type === 'primary' && styles.primaryButton,
@@ -30,6 +31,7 @@ const Button = ({ title, onPress, type = 'primary', loading = false, icon, style
 
     return (
         <TouchableOpacity
+            testID={testID}
             style={buttonStyles}
             onPress={onPress}
             disabled={loading || disabled}

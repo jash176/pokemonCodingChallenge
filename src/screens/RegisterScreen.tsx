@@ -75,6 +75,7 @@ const RegisterScreen = () => {
 
           <View style={styles.formContainer}>
             <Input
+              testID='name-input'
               label="Trainer Name"
               value={name}
               onChangeText={setName}
@@ -83,6 +84,7 @@ const RegisterScreen = () => {
             />
 
             <Input
+              testID='email-input'
               label="Email"
               value={email}
               onChangeText={setEmail}
@@ -93,6 +95,7 @@ const RegisterScreen = () => {
             />
 
             <Input
+              testID='password-input'
               label="Password"
               value={password}
               onChangeText={setPassword}
@@ -108,6 +111,7 @@ const RegisterScreen = () => {
             />
 
             <Input
+              testID='confirm-password-input'
               label="Confirm Password"
               value={confirmPassword}
               onChangeText={setConfirmPassword}
@@ -117,6 +121,7 @@ const RegisterScreen = () => {
             />
 
             <Button
+              testID='register-button'
               title="Register"
               onPress={handleRegister}
               loading={isLoading}
@@ -126,6 +131,7 @@ const RegisterScreen = () => {
             <Divider text="OR" />
 
             <Button
+              testID='google-login-button'
               title="Sign up with Google"
               onPress={handleGoogleSignIn}
               type="google"
@@ -135,7 +141,7 @@ const RegisterScreen = () => {
 
           <View style={styles.footer}>
             <Text style={styles.footerText}>Already have an account?</Text>
-            <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+            <TouchableOpacity testID='btn-login' onPress={() => navigation.navigate('Login')}>
               <Text style={styles.loginText}>Sign In</Text>
             </TouchableOpacity>
           </View>
