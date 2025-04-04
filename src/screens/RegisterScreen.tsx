@@ -75,15 +75,6 @@ const RegisterScreen = () => {
 
           <View style={styles.formContainer}>
             <Input
-              testID='name-input'
-              label="Trainer Name"
-              value={name}
-              onChangeText={setName}
-              placeholder="Ash Ketchum"
-              icon={<AccountOutline />}
-            />
-
-            <Input
               testID='email-input'
               label="Email"
               value={email}

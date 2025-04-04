@@ -4,6 +4,7 @@ import { BORDER_RADIUS, COLORS, FONT_SIZES, SHADOWS, SPACING } from '../utils/th
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { useAuth } from '../contexts/auth';
 import { StorageUtils } from '../utils/storage';
+import { NotificationService } from '../services/NotificationService';
 
 export default function SettingsScreen() {
   const navigation = useNavigation<NavigationProp<any>>();
@@ -92,6 +93,17 @@ export default function SettingsScreen() {
     );
   };
 
+  // Handle sending a test notification
+  const handleTestNotification = async () => {
+    try {
+      await NotificationService.sendLocalPokemonNotification();
+      Alert.alert('Success', 'Test notification sent. Check your notifications!');
+    } catch (error) {
+      console.error('Error sending test notification:', error);
+      Alert.alert('Error', 'Failed to send test notification');
+    }
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
@@ -137,6 +149,15 @@ export default function SettingsScreen() {
           <TouchableOpacity style={styles.settingItem} onPress={handleClearTeam}>
             <Text style={styles.settingText}>Clear Team Data</Text>
             <Text style={styles.logoutText}>→</Text>
+          </TouchableOpacity>
+        </View>
+
+        {/* New Developer Tools Section */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Developer Tools</Text>
+          <TouchableOpacity style={styles.settingItem} onPress={handleTestNotification}>
+            <Text style={styles.settingText}>Send Test Notification</Text>
+            <Text style={styles.arrowText}>→</Text>
           </TouchableOpacity>
         </View>
 
@@ -257,5 +278,9 @@ const styles = StyleSheet.create({
   versionText: {
     fontSize: FONT_SIZES.medium,
     color: COLORS.gray,
+  },
+  arrowText: {
+    fontSize: FONT_SIZES.medium,
+    color: COLORS.primary,
   },
 });

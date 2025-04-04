@@ -56,7 +56,6 @@ describe('RegisterScreen', () => {
     
     expect(getByText('Become a Trainer')).toBeTruthy();
     expect(getByText('Register to start your Pokémon journey!')).toBeTruthy();
-    expect(getByTestId('name-input')).toBeTruthy();
     expect(getByTestId('email-input')).toBeTruthy();
     expect(getByTestId('password-input')).toBeTruthy();
     expect(getByTestId('confirm-password-input')).toBeTruthy();
@@ -67,17 +66,14 @@ describe('RegisterScreen', () => {
   it('allows user to input registration details', () => {
     const { getByTestId } = render(<RegisterScreen />);
     
-    const nameInput = getByTestId('name-input');
     const emailInput = getByTestId('email-input');
     const passwordInput = getByTestId('password-input');
     const confirmPasswordInput = getByTestId('confirm-password-input');
     
-    fireEvent.changeText(nameInput, 'Ash Ketchum');
     fireEvent.changeText(emailInput, 'ash@pokemon.com');
     fireEvent.changeText(passwordInput, 'pikachu123');
     fireEvent.changeText(confirmPasswordInput, 'pikachu123');
     
-    expect(nameInput.props.value).toBe('Ash Ketchum');
     expect(emailInput.props.value).toBe('ash@pokemon.com');
     expect(passwordInput.props.value).toBe('pikachu123');
     expect(confirmPasswordInput.props.value).toBe('pikachu123');

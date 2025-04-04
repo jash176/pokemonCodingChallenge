@@ -24,10 +24,11 @@ import {useTeam} from '../contexts/team';
 import PokemonPreviewSheet, {
   PokemonPreviewSheetRef,
 } from '../components/PokemonPreviewSheet';
-import BottomSheet, {
+import {
   BottomSheetModalProvider,
 } from '@gorhom/bottom-sheet';
 import messaging from '@react-native-firebase/messaging';
+import InfoOutline from '../assets/icons/InfoOutline';
 export default function HomeScreen() {
   const navigation = useNavigation<NavigationProp<any>>();
   const {
@@ -116,7 +117,6 @@ export default function HomeScreen() {
     },
     [navigation],
   );
-  const bottomSheetRef = useRef<BottomSheet>(null);
 
   // callbacks
   const handleSheetChanges = useCallback((index: number) => {
@@ -137,12 +137,6 @@ export default function HomeScreen() {
         onPress={() => {
           navigation.navigate('Details', {url: item.url, name: item.name});
         }}>
-        {/* Gradient Background */}
-        {/* <LinearGradient 
-        colors={['#ffdf85', '#ffad60']} 
-        style={styles.gradientBackground}
-      /> */}
-
         {/* Pokémon Image */}
         <View style={styles.pokemonImageContainer}>
           <Image
@@ -156,7 +150,7 @@ export default function HomeScreen() {
         {/* Pokémon Info */}
         <View style={styles.pokemonInfo}>
           <Text style={styles.pokemonId}>#{pokemonId}</Text>
-          <Text style={styles.pokemonName}>
+          <Text style={styles.pokemonName} numberOfLines={1}>
             {item.name.charAt(0).toUpperCase() + item.name.slice(1)}
           </Text>
         </View>
@@ -169,7 +163,8 @@ export default function HomeScreen() {
               event.stopPropagation();
               openPokemonPreview(item, index);
             }}>
-            <Text style={styles.infoButtonText}>Info</Text>
+            {/* <Text style={styles.infoButtonText}>Info</Text> */}
+            <InfoOutline />
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -396,12 +391,8 @@ const styles = StyleSheet.create({
     marginTop: SPACING.m,
   },
   infoButton: {
-    backgroundColor: COLORS.primary,
-    paddingVertical: SPACING.s,
-    paddingHorizontal: SPACING.m,
     borderRadius: BORDER_RADIUS.small,
     alignSelf: 'center',
-    height: 40,
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: SPACING.s,

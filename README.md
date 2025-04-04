@@ -2,6 +2,12 @@
 
 A React Native mobile application that allows users to browse Pokemon, view detailed information, create teams, and manage user accounts. This app uses the PokeAPI to fetch Pokemon data and provides a rich, interactive experience for Pokemon enthusiasts.
 
+## App Demo
+
+Check out a video demonstration of the app:
+
+[![Pokemon Trainer App Demo](https://cdn.loom.com/sessions/thumbnails/1e6b0b7895ab41d89cbf39e3d857b6f4-with-play.gif)](https://www.loom.com/share/1e6b0b7895ab41d89cbf39e3d857b6f4?sid=66409210-b1b2-4dc6-aa50-6b41f1ef1929)
+
 ## Features
 
 - **Authentication System**: User registration and login with email/password and Google Sign-In
@@ -59,7 +65,7 @@ src/
 1. Clone the repository
 
 ```sh
-git clone <repository-url>
+git clone https://github.com/jash176/pokemonCodingChallenge
 cd pokemonCodingChallenge
 ```
 

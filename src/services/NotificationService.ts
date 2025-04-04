@@ -173,4 +173,22 @@ export const NotificationService = {
     }
     return await messaging().getToken();
   },
+
+  // Send a local notification with static Pokemon data for testing
+  sendLocalPokemonNotification: async () => {
+    // Static Pokemon data for testing
+    const testPokemonData = {
+      pokemonId: '25',
+      pokemonName: 'pikachu',
+      url: 'https://pokeapi.co/api/v2/pokemon/25/',
+    };
+    const notification = {
+      title: `Check out ${testPokemonData.pokemonName}!`,
+      body: `Tap to view details about ${testPokemonData.pokemonName.charAt(0).toUpperCase() + testPokemonData.pokemonName.slice(1)}`,
+      data: testPokemonData,
+    }
+
+    NotificationService.displayNotification(notification);
+    console.log('Local Pokemon notification sent with data:', testPokemonData);
+  },
 };
